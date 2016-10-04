@@ -1,2 +1,5 @@
-# 2016-2017_RobotC
-Code for the UCC Robotics team's 2016-2017 season (Do not steal plz)
+# 9651 Robotics Code
+
+Welcome to the UCC Robotics Team 9651 Code Repository. 
+
+Please check the wiki for software help.
