@@ -1,13 +1,13 @@
+#pragma config(Motor,  port2,           rightDrive,    tmotorVex269_MC29, openLoop)
+#pragma config(Motor,  port3,           leftDrive,     tmotorVex269_MC29, openLoop)
+#pragma config(Motor,  port4,           middleDrive,   tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port5,           rightArm,      tmotorVex393_MC29, openLoop)
+#pragma config(Motor,  port6,           leftArm,       tmotorVex393_MC29, openLoop)
 // Sides are defined as if you were looking from the back of the robot
 // Compare tmotorVmotor VS tmotorVex393
-// Motors on the left and right drive train Vex 269s 
-#pragma config(Motor,  port2,           rightDriveMotor,    tmotorVex269, openLoop)
-#pragma config(Motor,  port3,           leftDriveMotor,     tmotorVex269, openLoop)
-#pragma config(Motor,  port4,           middleMotor,        tmotorVex393, openLoop)
-#pragma config(Motor,  port5,           rightArmMotor,      tmotorVex393, openLoop)
-#pragma config(Motor,  port6,           leftArmMotor,       tmotorVex393, openLoop)
+// Motors on the left and right drive train Vex 269s
 // Take care when adding arm motors as this created problems compiling last time
-//Remember, 
+//Remember,
 // Ch4 is Y on the left side
 // Ch3 is X on the left side
 // Ch2 is Y on the right side
@@ -20,33 +20,75 @@
 task main()
 {
 
-	while (1 == 1) {
+	int controlscheme = 1;
 
-	motor[rightDriveMotor] = (vexRT[Ch2]);
-	motor[leftDriveMotor] = (vexRT[Ch4]);
-	if(vexRT[Btn5D] == 1) {
-			motor[middleMotor] = -127;
-	}
-	else if(vexRT[Btn6D] == 1)
-	{
-		motor[middleMotor] = 127;
-	}
-	else if(vexRT[Btn6U] == 1)
-	{
-		motor[rightArmMotor] = 127;
-		motor[leftArmMotor] = 127;
-	}	
-	else if(vexRT[Btn5U] == 1)
-	{
-		motor[rightArmMotor] = -127;
-		motor[leftArmMotor] = -127;
-	}	
-	else
-	{
-		motor[rightArmMotor] = 0;
-		motor[leftArmMotor] = 0;
-		motor[middleMotor] = 0;
-	}
+	while (true) {
 
-	}
-}
+	if(VexRT[Btn7R] == 1)
+		{
+			controlscheme = 1;
+		}
+
+	if(VexRT[Btn7L] == 1)
+		{
+			controlscheme = 2;
+		}
+
+	switch(controlscheme) {
+
+		case 1:
+			motor[rightDrive] = (vexRT[Ch2]);
+			motor[leftDrive] = (vexRT[Ch3]);
+			if(vexRT[Btn5D] == 1) {
+			motor[middleDrive] = -127;
+			}
+			else if(vexRT[Btn6D] == 1)
+			{
+			motor[middleDrive] = 127;
+			}
+			else if(vexRT[Btn6U] == 1)
+			{
+			motor[rightArm] = 127;
+			motor[leftArm] = 127;
+			}
+			else if(vexRT[Btn5U] == 1)
+			{
+			motor[rightArm] = -127;
+			motor[leftArm] = -127;
+			}
+			else
+			{
+			motor[rightArm] = 0;
+			motor[leftArm] = 0;
+			motor[middleDrive] = 0;
+			}
+
+		case 2:
+			motor[rightDrive] = (vexRT[Ch2]);
+			motor[leftDrive] = (vexRT[Ch3]);
+			if(vexRT[Btn5D] == 1) {
+				motor[middleDrive] = -127;
+			}
+			else if(vexRT[Btn6D] == 1)
+			{
+				motor[middleDrive] = 127;
+			}
+			else if(vexRT[Btn8U] == 1)
+			{
+				motor[rightArm] = 127;
+				motor[leftArm] = 127;
+			}
+			else if(vexRT[Btn8D] == 1)
+			{
+				motor[rightArm] = -127;
+				motor[leftArm] = -127;
+			}
+			else
+			{
+				motor[rightArm] = 0;
+				motor[leftArm] = 0;
+				motor[middleDrive] = 0;
+			}	// Close else brace
+		} // Close case swap brace
+	} // Close true loop brace
+} // Close task main brace
