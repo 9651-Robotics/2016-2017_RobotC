@@ -3,6 +3,7 @@
 #pragma config(Motor,  port4,           middleDrive,   tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port5,           rightArm,      tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port6,           leftArm,       tmotorVex393_MC29, openLoop)
+#define DEADZONE 20
 // Sides are defined as if you were looking from the back of the robot
 // Compare tmotorVmotor VS tmotorVex393
 // Motors on the left and right drive train Vex 269s
@@ -22,6 +23,7 @@ task main()
 
 	int controlscheme = 1;
 
+
 	while (true) {
 
 	if(VexRT[Btn7R] == 1)
@@ -33,6 +35,10 @@ task main()
 		{
 			controlscheme = 2;
 		}
+	if(VexRT[Btn7D] == 1)
+	{
+		controlscheme = 3;
+	}
 
 	switch(controlscheme) {
 
@@ -88,7 +94,7 @@ task main()
 				motor[rightArm] = 0;
 				motor[leftArm] = 0;
 				motor[middleDrive] = 0;
-			}	// Close else brace
+			} //Close else brace
 		} // Close case swap brace
 	} // Close true loop brace
 } // Close task main brace
