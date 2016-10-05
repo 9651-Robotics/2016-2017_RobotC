@@ -1,6 +1,7 @@
 #pragma config(Motor,  port2,           rightMotor,    tmotorVmotor, openLoop)
 #pragma config(Motor,  port3,           middleMotor,   tmotorVex393, openLoop)
 #pragma config(Motor,  port4,           leftMotor,     tmotorVex393, openLoop)
+// Take care when adding arm motors as this created problems compiling last time
 
 task main()
 {
