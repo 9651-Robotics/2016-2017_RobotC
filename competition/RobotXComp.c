@@ -53,6 +53,9 @@ task usercontrol()
 	switch(controlscheme) {
 
 		case 1:
+
+
+
 			motor[driveRight] = (vexRT[Ch2]);
 			motor[driveLeft] = (vexRT[Ch3]);
 			if(vexRT[Btn5D] == 1) {
