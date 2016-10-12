@@ -1,3 +1,4 @@
+// Competition code for Evan's Robot
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port3,           driveLeft,     tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port4,           driveMiddle,   tmotorVex393_MC29, openLoop)
