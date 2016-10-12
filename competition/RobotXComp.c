@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 #pragma config(I2C_Usage, I2C1, i2cSensors)
 #pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+=======
+// Competition code for Evan's Robot
+>>>>>>> origin/master
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port3,           driveLeft,     tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port4,           driveMiddle,   tmotorVex393_MC29, openLoop)
