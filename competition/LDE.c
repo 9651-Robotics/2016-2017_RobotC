@@ -30,7 +30,9 @@
 #include "Vex_Competition_Includes.c"
 //Declare functions under this line
 
+
 //Useless if DEADZONE controls don't work or aren't engaged
+//Unneeded
 #define JOYSTICK_DEADZONE 15
 // Also consider defining DEADZONE as an integer
 // and setting the motor to zero if the abs(Ch2 (or whatever))
