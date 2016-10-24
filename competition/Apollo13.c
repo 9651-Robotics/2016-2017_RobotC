@@ -61,6 +61,7 @@ task usercontrol()
 		displayLCDNumber(0,0,nBatteryAverage);
 		// There can be only one
 		// Hey, why not try
+		//Functional (???)
 		displayLCDNumber(nMotorEncoder[armRight]);
 		// at some point, eh?
 
