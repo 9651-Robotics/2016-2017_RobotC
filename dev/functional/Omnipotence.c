@@ -1,4 +1,3 @@
-
 #pragma config(Sensor, dgtl4,  sonarRight,     sensorSONAR_cm)
 #pragma config(Sensor, dgtl6,  sonarLeft,      sensorSONAR_cm)
 #pragma config(Sensor, dgtl8,  sonarBack,      sensorSONAR_cm)
@@ -54,4 +53,3 @@ task main()
  		displayNextLCDString("CM");
 	}
 }
-
