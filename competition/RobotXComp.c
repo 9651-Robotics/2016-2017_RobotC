@@ -1,6 +1,6 @@
-//#pragma config(I2C_Usage, I2C1, i2cSensors)
-//#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
-//#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+#pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, dgtl1,  					rightEncoder,  sensorQuadEncoder)
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269, openLoop)
 #pragma config(Motor,  port3,           driveLeft,     tmotorVex269, openLoop)
@@ -17,10 +17,9 @@
 
 #include "Vex_Competition_Includes.c"
 
-void Forward(float r);
 int nBatteryAverage = nAvgBatteryLevel;
 
-const float rotations = 360.0;
+//const float rotations = 360.0;
 
 void pre_auton()
 {
@@ -62,12 +61,12 @@ task usercontrol()
 		{
 			motor[driveMiddle] = 127;
 		}
-		else if(vexRT[Btn8U] == 1)
+		else if(vexRT[Btn6U] == 1)
 		{
 			motor[armRight] = 127;
 			motor[armLeft] = 127;
 		}
-		else if(vexRT[Btn8D] == 1)
+		else if(vexRT[Btn5U] == 1)
 		{
 			motor[armRight] = -127;
 			motor[armLeft] = -127;
@@ -82,6 +81,5 @@ task usercontrol()
 			motor[armLeft] = 0;
 			motor[driveMiddle] = 0;
 		} //Close else
-
 	} // Close true loop brace
 } // Close user control brace
