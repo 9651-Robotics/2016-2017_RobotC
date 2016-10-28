@@ -21,13 +21,13 @@
 //Current Battery level in millivolts (Value of 10456 means 10.456 Volts)
 //Average refers to the fact that the measurements are the average of 20 samples, taken to smooth voltage spikes and drops
 //Data type: Short
-//Min/max = (-32.768 - +32,767)
+//Min/max = (-32,768 - +32,767)
 int nBatteryAverage = nAvgBatteryLevel;
 //Sets armRight to master motor and armLeft to slave motor, thus, input sent to one will be mirrored to the other
 slaveMotor(armLeft, armRight);
 //Map armRight ro port 5 (???)
 mapEncoderToMotor(port5, I2C_1);
-//Get motor velocity from armRight	
+//Get motor velocity from armRight
 int motorRpm = getMotorVelocity(port5);
 //Define wheel diamete, ticks per revolution and ticks per one degree at some point
 //Also check arm motor gearing (speed VS torque)
@@ -39,7 +39,7 @@ void pre_auton()
   bStopTasksBetweenModes = true;
 
 	// All activities that occur before the competition starts
-	// Example: clearing encoders, setting servo positions, ... 
+	// Example: clearing encoders, setting servo positions, ...
   	// resetMotorEncoder(xMotor);
 }
 
@@ -54,7 +54,7 @@ task usercontrol()
 	while (true)
 	{
 
-		//Display battery average 
+		//Display battery average
 		displayLCDPos(0,1);
 		displayNextLCDNumber(nBatteryAverage);
 		// or
