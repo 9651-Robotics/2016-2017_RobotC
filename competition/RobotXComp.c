@@ -2,6 +2,7 @@
 #pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, dgtl1,  					rightEncoder,  sensorQuadEncoder)
+#pragma config(Sensor, dgtl3,  					leftEncoder,   sensorQuadEncoder)
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269, openLoop)
 #pragma config(Motor,  port3,           driveLeft,     tmotorVex269, openLoop)
 #pragma config(Motor,  port4,           driveMiddle,   tmotorVex393, openLoop)
@@ -46,10 +47,10 @@ task usercontrol()
 		clearLCDLine(0);
 		clearLCDLine(1);
 		displayLCDPos(0,0);
-		displayNextLCDString("Battery:");
-		displayNextLCDNumber(nBatteryAverage);
+		displayNextLCDString("Left:");
+		displayNextLCDNumber(SensorValue(leftEncoder));
 		displayLCDPos(1,0);
-		displayNextLCDString("RightNcodr:");
+		displayNextLCDString("Right:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
 
 		motor[driveRight] = (vexRT[Ch2]);
@@ -74,6 +75,7 @@ task usercontrol()
 		else if(vexRT[Btn8U] == 1)
 		{
 			SensorValue[rightEncoder] = 0;
+			SensorValue[leftEncoder] = 0;
 		}
 		else
 		{
