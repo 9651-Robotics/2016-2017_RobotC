@@ -6,8 +6,11 @@
 #pragma config(Motor,  port3,  backRight,     tmotorNormal, openLoop)
 #pragma config(Motor,  port4,  frontLeft,     tmotorNormal, openLoop, reversed)
 #pragma config(Motor,  port5,  backLeft,      tmotorNormal, openLoop, reversed)
-#pragma config(Motor,  port6,  armRight,      tmotorNormal, openLoop)
-#pragma config(Motor,  port7,  armLeft,       tmotorNormal, openLoop, reversed)
+#pragma config(Motor,  port6,  armRight1,      tmotorNormal, openLoop)
+#pragma config(Motor,  port7,  armLeft1,       tmotorNormal, openLoop, reversed)
+#pragma config(Motor,  port8,  armRight2,      tmotorNormal, openLoop)
+#pragma config(Motor,  port9,  armLeft2,       tmotorNormal, openLoop, reversed)
+
 
 #pragma platform(VEX)
 
@@ -48,16 +51,22 @@ task usercontrol(){
     	motor[backLeft] =  vexRT[Ch3] + vexRT[Ch1] - vexRT[Ch4];
 
     	if(vexRT[Btn6U] == 1) {
-    		motor[armRight] = 127;
-    		motor[armLeft] = 127;
+    		motor[armRight1] = 32;
+    		motor[armLeft1] = 32;
+    		motor[armRight2] = 32;
+    		motor[armLeft2] =  32;
    	 	}
    	 	else if(vexRT[Btn6D] == 1) {
-   	 		motor[armRight] = -127;
-   	 		motor[armLeft] = -127;
+   	 		motor[armRight1] = 127;
+   	 		motor[armLeft1] = 127;
+   	 		motor[armRight2] = 127;
+    		motor[armLeft2] = 127;
    		}
    		else {
-   			motor[armRight] = 0;
-   			motor[armLeft] = 0;
+   			motor[armRight1] = 0;
+   			motor[armLeft1] = 0;
+   			motor[armRight2] = 0;
+    		motor[armLeft2] = 0;
    		}
 
   		if(vexRT[Btn5U] == 1)
