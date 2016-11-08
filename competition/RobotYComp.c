@@ -22,7 +22,8 @@
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 
-int armDegree =SensorValue(armAngle);
+int armDegree = SensorValue(armAngle);
+int DANGER = 1740;
 
 void pre_auton()
 {
@@ -61,17 +62,26 @@ task usercontrol(){
     	motor[frontLeft] = vexRT[Ch3] + vexRT[Ch1] + vexRT[Ch4];
     	motor[backLeft] =  vexRT[Ch3] + vexRT[Ch1] - vexRT[Ch4];
 
-    	if(vexRT[Btn6U] == 1) {
-    		motor[armRight1] = 70;
-    		motor[armLeft1] = 70;
-    		motor[armRight2] = 70;
-    		motor[armLeft2] =  70;
+    	//Move arm down
+    	if(vexRT[Btn6U] == 1 && armDegree < DANGER) {
+    		motor[armRight1] = 127;
+    		motor[armLeft1] = 127;
+    		motor[armRight2] = 127;
+    		motor[armLeft2] =  127;
    	 	}
+   	 	//Move Arm Up Slow
+   	 	else if (vexRT[Btn6U] == 1 && armDegree > DANGER) {
+   	 		motor[armRight1] = -127;
+   	 		motor[armLeft1] = -127;
+   	 		motor[armRight2] = -127;
+    		motor[armLeft2] = -127;
+   		}
+ 			//Move Arm Up
    	 	else if(vexRT[Btn6D] == 1) {
-   	 		motor[armRight1] = -90;
-   	 		motor[armLeft1] = -90;
-   	 		motor[armRight2] = -90;
-    		motor[armLeft2] = -90;
+   	 		motor[armRight1] = -127;
+   	 		motor[armLeft1] = -127;
+   	 		motor[armRight2] = -127;
+    		motor[armLeft2] = -127;
    		}
    		else {
    			motor[armRight1] = 0;
@@ -101,9 +111,17 @@ task usercontrol(){
 				bLCDBacklight = false;
 			}
 
+		//Arm Max: 3136, 3137
+		//Arm DANGERZONE: 1740, 1735
+		//Arm TALLEST: 1410
+		//Arm WALLREACH: 1335
+		//Arm GROUNDSAFE: 10
+		//Arm Min: 0(???)
+
 		displayLCDPos(0,0);
 		displayNextLCDString("Arm:");
-		displayNextLCDNumber(armDegree);
+		displayNextLCDNumber(SensorValue(armAngle));
+		//displayNextLCDNumber(armDegree);
 
   	//displayLCDPos(0,0);
   	//displayNextLCDString("F:");
