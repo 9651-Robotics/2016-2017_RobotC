@@ -26,6 +26,8 @@ int nBatteryAverage = nAvgBatteryLevel;
 //Rotations captured @ 127 motor power
 //Ticks per one wheel rotation back left = 362, 352, 379, 369, 360, 364, 363, 355
 //Ticks per one wheel roation back right = 373, 343, 371, 377, 363, 350, 369, 359
+//Wheel diameter = 10.3 CM
+
 
 void pre_auton()
 {
