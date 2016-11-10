@@ -1,4 +1,5 @@
 #pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(Sensor, in1, armAngle, sensorPotentiometer)
 #pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, dgtl1,  					rightEncoder,  sensorQuadEncoder)
@@ -18,6 +19,7 @@
 
 #include "Vex_Competition_Includes.c"
 
+int lightToggle = 1;
 int nBatteryAverage = nAvgBatteryLevel;
 
 //const float rotations = 360.0;
@@ -44,8 +46,6 @@ task usercontrol()
 
 	while (true) {
 
-		clearLCDLine(0);
-		clearLCDLine(1);
 		displayLCDPos(0,0);
 		displayNextLCDString("Left:");
 		displayNextLCDNumber(SensorValue(leftEncoder));
@@ -53,12 +53,20 @@ task usercontrol()
 		displayNextLCDString("Right:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
 
-		motor[driveRight] = (vexRT[Ch2]);
-		motor[driveLeft] = (vexRT[Ch3]);
-		if(vexRT[Btn5D] == 1) {
+		motor[driveRight] = (vexRT[Ch3]);
+		motor[driveLeft] = (vexRT[Ch2]);
+		if(vexRT[Btn7U] == 1)
+		{
+			lightToggle++;
+		}
+		if(lightToggle % 2 == 0)
+		{
+				bLCDBacklight = true;
+		}
+		if(vexRT[Btn6D] == 1) {
 			motor[driveMiddle] = -127;
 		}
-		else if(vexRT[Btn6D] == 1)
+		else if(vexRT[Btn5D] == 1)
 		{
 			motor[driveMiddle] = 127;
 		}
