@@ -19,7 +19,6 @@
 
 #include "Vex_Competition_Includes.c"
 
-int lightToggle = 1;
 int nBatteryAverage = nAvgBatteryLevel;
 
 //const float rotations = 360.0;
@@ -55,11 +54,7 @@ task usercontrol()
 
 		motor[driveRight] = (vexRT[Ch3]);
 		motor[driveLeft] = (vexRT[Ch2]);
-		if(vexRT[Btn7U] == 1)
-		{
-			lightToggle++;
-		}
-		if(lightToggle % 2 == 0)
+		while(vexRT[Btn7U] == 1)
 		{
 				bLCDBacklight = true;
 		}
