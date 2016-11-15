@@ -15,7 +15,7 @@ Galveston
 Lubbock
 Waco
 Abilene
-Irving
+Irving √
 McAllen
 Tyler
 McKinney
