@@ -56,13 +56,14 @@ task usercontrol()
 	while (true) {
 
 		displayLCDPos(0,0);
-		displayNextLCDString("Left:");
-		displayLCDNumber(SensorValue(leftEncoder));
-		displayLDCString("_")
-		displayLCDString("Right:");
+		displayNextLCDString("L:");
+		displayNextLCDNumber(SensorValue(leftEncoder));
+		displayNextLCDString("  ");
+		displayNextLCDString("R:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
-		displayLCDString(0, 0, "Battery: ");
+		displayLCDString(1, 0, "Bat: ");
 		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V');
+		displayNextLCDString(mainBattery);
 
 
 		motor[driveRight] = (vexRT[Ch3]);
@@ -106,6 +107,7 @@ task usercontrol()
 		}
 		else
 		{
+
 			motor[armRight] = 0;
 			motor[armLeft] = 0;
 			motor[driveMiddle] = 0;
