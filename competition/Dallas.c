@@ -1,7 +1,8 @@
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(I2C_Usage, I2C1, i2cSensors)
 #pragma config(Sensor, in1, armAngle, sensorPotentiometer)
-#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
-#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+//#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+//#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, dgtl1,  					rightEncoder,  sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  					leftEncoder,   sensorQuadEncoder)
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269, openLoop)
@@ -19,6 +20,10 @@
 
 
 #include "Vex_Competition_Includes.c"
+
+const short leftButton = 1;
+const short centerButton = 2;
+const short rightButton = 4;
 
 int nBatteryAverage = nAvgBatteryLevel;
 
@@ -47,10 +52,63 @@ task autonomous()
 
 }
 
+void waitForPress()
+{
+	while(nLCDButtons == 0){}
+	wait1Msec(5);
+}
+void waitForRelease()
+{
+	while(nLCDButtons != 0){}
+	wait1Msec(5);
+}
+
 task usercontrol()
 {
 
+	int count = 0;
+	string mainBattery, backupBattery;
+
 	while (true) {
+
+	while(nLCDButtons != centerButton)
+	{
+	switch(count){
+	case 0:
+	displayLCDCenteredString(0, "Battery Level");
+	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
+	displayNextLCDString(mainBattery);
+	waitForPress();
+	if(nLCDButtons == leftButton)
+	{
+		waitForRelease();
+		count = 3;
+	}
+	else if(nLCDButtons == rightButton)
+	{
+	waitForRelease();
+	count++;
+	}
+	break;
+	case 1:
+	//Display second choice
+	displayLCDCenteredString(0, "Encoders");
+	displayLCDCenteredLine(1, "R:"displayNextLCDNumber(SensorValue(rightEncoder))"___""L:""R:"displayNextLCDNumber(SensorValue(leftEncoder));;);
+	waitForPress();
+	//Increment or decrement "count" based on button press
+	if(nLCDButtons == leftButton)
+	{
+	waitForRelease();
+	count--;
+	}
+	else if(nLCDButtons == rightButton)
+	{
+	waitForRelease();
+	count++;
+	}
+	break;
+	}
+}
 
 		displayLCDPos(0,0);
 		displayNextLCDString("Left:");
