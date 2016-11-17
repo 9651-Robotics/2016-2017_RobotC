@@ -19,7 +19,7 @@ Irving √
 McAllen
 Tyler
 McKinney
-Frisco
-Denton
+Frisco √
+Denton 
 Katy
 Round Rock

@@ -21,6 +21,10 @@
 
 #include "Vex_Competition_Includes.c"
 
+const short leftButton = 1;
+const short centerButton = 2;
+const short rightButton = 4;
+
 int nBatteryAverage = nAvgBatteryLevel;
 
 //const float rotations = 360.0;
@@ -31,6 +35,15 @@ int nBatteryAverage = nAvgBatteryLevel;
 //Wheel diameter = 10.3 CM (32.3584)
 
 
+void waitForPress() {
+	while(nLCDButtons == 0){}
+	wait1Msec(3);
+}
+void waitForRelease()
+{
+	while(nLCDButtons != 0){}
+	wait1Msec(3);
+}
 void armUp() {
 	motor[armRight] = 127;
 	motor[armLeft] = 127;
@@ -69,6 +82,7 @@ void pre_auton()
 	// or
 	// nMotorEncoder[rightEncoder]=0;
 	// nMotorEncoder[leftEncoder]=0;
+	// or
 	// SensorValue[dgtl1] = 0;
 	// SensorValue[dgtl3] = 0;
 
@@ -76,6 +90,8 @@ void pre_auton()
 
 task autonomous()
 {
+	  // If we do end up needing two autonomous modes, check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
+
 	  //Stage 1: turn right and left motors forward
 	  while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430) {
 	  	motor[driveLeft] = 65;
@@ -87,6 +103,7 @@ task autonomous()
 	  	motor[driveLeft] = 65;
 	  	motor[driveRight] = -65;
 	  }
+	  //Turn arm sometime between stages two and three
 	  wait1Msec(1000);
 	  //Stage 3: reverse
 	  while(SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20) {
@@ -100,6 +117,7 @@ task usercontrol()
 {
 
 	string mainBattery, backupBattery;
+	int count = 0;
 
 	while (true) {
 
@@ -108,8 +126,10 @@ task usercontrol()
 		// Battery potential differance
 		// Joystick values
 
+		//Attempt to define closer in the file to the void functions
 		int leftForce = vexRT[Ch2];
 		int rightForce = vexRT[Ch3];
+
 
 		displayLCDPos(0,0);
 		displayNextLCDString("L:");
