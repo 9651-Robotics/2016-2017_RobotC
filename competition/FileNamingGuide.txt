@@ -13,7 +13,7 @@ Amarillo
 Plano
 Galveston
 Lubbock
-Waco
+Waco √
 Abilene
 Irving √
 McAllen

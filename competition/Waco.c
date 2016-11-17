@@ -1,8 +1,8 @@
-#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(Sensor, in1, armAngle, sensorPotentiometer)
-//#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
-//#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+#pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
+#pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, dgtl1,  					rightEncoder,  sensorQuadEncoder)
 #pragma config(Sensor, dgtl3,  					leftEncoder,   sensorQuadEncoder)
 #pragma config(Motor,  port2,           driveRight,    tmotorVex269, openLoop)
@@ -21,10 +21,6 @@
 
 #include "Vex_Competition_Includes.c"
 
-const short leftButton = 1;
-const short centerButton = 2;
-const short rightButton = 4;
-
 int nBatteryAverage = nAvgBatteryLevel;
 
 //const float rotations = 360.0;
@@ -32,8 +28,29 @@ int nBatteryAverage = nAvgBatteryLevel;
 //Ticks per one wheel rotation back left = 362, 352, 379, 369, 360, 364, 363, 355
 //Ticks per one wheel roation back right = 373, 343, 371, 377, 363, 350, 369, 359
 //11.2 ticks = 1 CM of movement on the back wheels (both sides)
-//Wheel diameter = 10.3 CM
+//Wheel diameter = 10.3 CM (32.3584)
 
+
+void armUp() {
+	motor[armRight] = 127;
+	motor[armLeft] = 127;
+}
+void armDown() {
+	motor[armRight] = -127;
+	motor[armLeft] = -127;
+}
+void forkDown() {
+	motor[armFork] = 63;
+}
+void forkUp() {
+	motor[armFork] = -63;
+}
+void middleRight() {
+	motor[driveMiddle] = -127;
+}
+void middleLeft() {
+	motor[driveMiddle] = 127;
+}
 
 void pre_auton()
 {
@@ -41,81 +58,55 @@ void pre_auton()
 	// Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
 	bStopTasksBetweenModes = true;
 
-	//SensorValue[rightEncoder] = 0;
+	SensorValue[rightEncoder] = 0;
+	SensorValue[leftEncoder] = 0;
+	// or
+	// nMotorEncoder[rightEncoder]=0;
+	// nMotorEncoder[leftEncoder]=0;
+	// SensorValue[dgtl1] = 0;
+	// SensorValue[dgtl3] = 0;
 
 }
 
 task autonomous()
 {
+	  //Stage 1: turn right and left motors forward
+	  while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430) {
+	  	motor[driveLeft] = 65;
+	  	motor[driveRight] = 65;
+	  }
+	  wait1Msec(1000);
+	  //Stage 2: turn 180 degrees
+	  while(SensorValue[rightEncoder] >= -165 && SensorValue[leftEncoder] <= 1110) {
+	  	motor[driveLeft] = 65;
+	  	motor[driveRight] = -65;
+	  }
+	  wait1Msec(1000);
+	  //Stage 3: reverse
+	  while(SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20) {
+	  	motor[driveLeft] = -65;
+	  	motor[driveRight] = -65;
+	  }
 
-	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
-
-}
-
-void waitForPress()
-{
-	while(nLCDButtons == 0){}
-	wait1Msec(5);
-}
-void waitForRelease()
-{
-	while(nLCDButtons != 0){}
-	wait1Msec(5);
 }
 
 task usercontrol()
 {
 
-	int count = 0;
 	string mainBattery, backupBattery;
 
 	while (true) {
 
-	while(nLCDButtons != centerButton)
-	{
-	switch(count){
-	case 0:
-	displayLCDCenteredString(0, "Battery Level");
-	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
-	displayNextLCDString(mainBattery);
-	waitForPress();
-	if(nLCDButtons == leftButton)
-	{
-		waitForRelease();
-		count = 3;
-	}
-	else if(nLCDButtons == rightButton)
-	{
-	waitForRelease();
-	count++;
-	}
-	break;
-	case 1:
-	//Display second choice
-	displayLCDCenteredString(0, "Encoders");
-	displayLCDCenteredLine(1, "R:"displayNextLCDNumber(SensorValue(rightEncoder))"___""L:""R:"displayNextLCDNumber(SensorValue(leftEncoder));;);
-	waitForPress();
-	//Increment or decrement "count" based on button press
-	if(nLCDButtons == leftButton)
-	{
-	waitForRelease();
-	count--;
-	}
-	else if(nLCDButtons == rightButton)
-	{
-	waitForRelease();
-	count++;
-	}
-	break;
-	}
-}
-
 		displayLCDPos(0,0);
-		displayNextLCDString("Left:");
+		displayNextLCDString("L:");
 		displayNextLCDNumber(SensorValue(leftEncoder));
-		displayLCDPos(1,0);
-		displayNextLCDString("Right:");
+		displayNextLCDString("  ");
+		displayNextLCDString("R:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
+		displayLCDString(1, 0, "Bat: ");
+		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V');
+		displayNextLCDString(mainBattery);
+
 
 		motor[driveRight] = (vexRT[Ch3]);
 		motor[driveLeft] = (vexRT[Ch2]);
@@ -152,12 +143,13 @@ task usercontrol()
 		else if(vexRT[Btn8D] == 1)
 		{
 			clearLCDLine(0);
-  		clearLCDLine(1);
+  			clearLCDLine(1);
 			SensorValue[rightEncoder] = 0;
 			SensorValue[leftEncoder] = 0;
 		}
 		else
 		{
+
 			motor[armRight] = 0;
 			motor[armLeft] = 0;
 			motor[driveMiddle] = 0;

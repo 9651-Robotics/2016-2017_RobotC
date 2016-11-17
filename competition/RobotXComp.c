@@ -1,4 +1,5 @@
 #pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(Sensor, in1, armAngle, sensorPotentiometer)
 #pragma config(Sensor, I2C_2,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
 #pragma config(Sensor, I2C_3,  , sensorQuadEncoderOnI2CPort, ,AutoAssign)
@@ -50,14 +51,19 @@ task autonomous()
 task usercontrol()
 {
 
+	string mainBattery, backupBattery;
+
 	while (true) {
 
 		displayLCDPos(0,0);
 		displayNextLCDString("Left:");
-		displayNextLCDNumber(SensorValue(leftEncoder));
-		displayLCDPos(1,0);
-		displayNextLCDString("Right:");
+		displayLCDNumber(SensorValue(leftEncoder));
+		displayLDCString("_")
+		displayLCDString("Right:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
+		displayLCDString(0, 0, "Battery: ");
+		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V');
+
 
 		motor[driveRight] = (vexRT[Ch3]);
 		motor[driveLeft] = (vexRT[Ch2]);
