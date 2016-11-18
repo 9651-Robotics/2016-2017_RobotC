@@ -57,9 +57,9 @@ task usercontrol()
 
 		displayLCDPos(0,0);
 		displayNextLCDString("Left:");
-		displayLCDNumber(SensorValue(leftEncoder));
-		displayLDCString("_")
-		displayLCDString("Right:");
+		displayNextLCDNumber(SensorValue(leftEncoder));
+		displayNextLCDString("_");
+		displayNextLCDString("Right:");
 		displayNextLCDNumber(SensorValue(rightEncoder));
 		displayLCDString(0, 0, "Battery: ");
 		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V');

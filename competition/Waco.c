@@ -142,7 +142,7 @@ task usercontrol()
 		else(vexRT[Btn8L] == 1) {
 			driveMiddle = 0;
 		}
-		
+
 		//Fork (arm built onto the end of the main arm)
 		if(vexRT[Btn5U] == 1) {
 			forkUp();
@@ -153,7 +153,7 @@ task usercontrol()
 		else {
 			armFork = 0;
 		}
-		
+
 		//Arm motors
 		if(vexRT[Btn6U] == 1) {
 			armUp();
@@ -164,6 +164,6 @@ task usercontrol()
 		else {
 			armLeft = 0;
 			armRight = 0;
-		} 
-	} 
-} 
+		}
+	}
+}

@@ -49,26 +49,20 @@ void armUp() {
 	motor[armLeft] = 127;
 }
 void armDown() {
-	motor[armRight] = -127;
-	motor[armLeft] = -127;
+	motor[armRight] = -90;
+	motor[armLeft] = -90;
 }
 void forkDown() {
-	motor[armFork] = 63;
+	motor[armFork] = 25;
 }
 void forkUp() {
-	motor[armFork] = -63;
+	motor[armFork] = -50;
 }
 void middleRight() {
 	motor[driveMiddle] = -127;
 }
 void middleLeft() {
 	motor[driveMiddle] = 127;
-}
-void screenwipe() {
-	clearLCDLine(0);
-  	clearLCDLine(1);
-	SensorValue[rightEncoder] = 0;
-	SensorValue[leftEncoder] = 0;
 }
 
 void pre_auton()
@@ -79,12 +73,10 @@ void pre_auton()
 
 	SensorValue[rightEncoder] = 0;
 	SensorValue[leftEncoder] = 0;
-	// or
-	// nMotorEncoder[rightEncoder]=0;
-	// nMotorEncoder[leftEncoder]=0;
-	// or
-	// SensorValue[dgtl1] = 0;
-	// SensorValue[dgtl3] = 0;
+	nMotorEncoder[rightEncoder]=0;
+	nMotorEncoder[leftEncoder]=0;
+	SensorValue[dgtl1] = 0;
+	SensorValue[dgtl3] = 0;
 
 }
 
@@ -94,21 +86,21 @@ task autonomous()
 
 	  //Stage 1: turn right and left motors forward
 	  while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430) {
-	  	motor[driveLeft] = 65;
-	  	motor[driveRight] = 65;
+	  	motor[driveLeft] = 67;
+	  	motor[driveRight] = 67;
 	  }
 	  wait1Msec(1000);
 	  //Stage 2: turn 180 degrees
-	  while(SensorValue[rightEncoder] >= -165 && SensorValue[leftEncoder] <= 1110) {
-	  	motor[driveLeft] = 65;
-	  	motor[driveRight] = -65;
+	  while(SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110) {
+	  	motor[driveLeft] = 67;
+	  	motor[driveRight] = -67;
 	  }
 	  //Turn arm sometime between stages two and three
 	  wait1Msec(1000);
 	  //Stage 3: reverse
 	  while(SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20) {
-	  	motor[driveLeft] = -65;
-	  	motor[driveRight] = -65;
+	  	motor[driveLeft] = -67;
+	  	motor[driveRight] = -67;
 	  }
 
 }
@@ -130,7 +122,9 @@ task usercontrol()
 		int leftForce = vexRT[Ch2];
 		int rightForce = vexRT[Ch3];
 
+		//matthew wang more like matthew "WANG"
 
+														// - Carpet Cock
 		displayLCDPos(0,0);
 		displayNextLCDString("L:");
 		displayNextLCDNumber(SensorValue(leftEncoder));
@@ -144,12 +138,19 @@ task usercontrol()
 		motor[driveRight] = (vexRT[Ch3]);
 		motor[driveLeft] = (vexRT[Ch2]);
 
-		//Screen controls
-		while(vexRT[Btn8U] == 1) {
-			bLCDBacklight = true;
+		while(vexRT[Btn8U] == 1)
+		{
+				bLCDBacklight = true;
 		}
-		while(vexRT[Btn8U] == 1) {
-			screenwipe();
+		if(vexRT[Btn8D] == 1)
+		{
+			clearLCDLine(0);
+  		clearLCDLine(1);
+			SensorValue[rightEncoder] = 0;
+			SensorValue[leftEncoder] = 0;
+		}
+		else {
+
 		}
 
 		//Middle Wheel (Currently immobile due to arm weight)
@@ -159,10 +160,10 @@ task usercontrol()
 		else if(vexRT[Btn8L] == 1) {
 			middleLeft();
 		}
-		else(vexRT[Btn8L] == 1) {
-			driveMiddle = 0;
+		else{
+			motor[driveMiddle] = 0;
 		}
-		
+
 		//Fork (arm built onto the end of the main arm)
 		if(vexRT[Btn5U] == 1) {
 			forkUp();
@@ -171,9 +172,9 @@ task usercontrol()
 			forkDown();
 		}
 		else {
-			armFork = 0;
+			 motor[armFork] = 0;
 		}
-		
+
 		//Arm motors
 		if(vexRT[Btn6U] == 1) {
 			armUp();
@@ -182,8 +183,8 @@ task usercontrol()
 			armDown();
 		}
 		else {
-			armLeft = 0;
-			armRight = 0;
-		} 
-	} 
-} 
+			motor[armLeft] = 0;
+			motor[armRight] = 0;
+		}
+	}
+}
