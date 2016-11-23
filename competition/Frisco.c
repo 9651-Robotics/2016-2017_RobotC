@@ -27,10 +27,6 @@ const short rightButton = 4;
 
 int nBatteryAverage = nAvgBatteryLevel;
 
-//const float rotations = 360.0;
-//Rotations captured @ 127 motor power
-//Ticks per one wheel rotation back left = 362, 352, 379, 369, 360, 364, 363, 355
-//Ticks per one wheel roation back right = 373, 343, 371, 377, 363, 350, 369, 359
 //11.2 ticks = 1 CM of movement on the back wheels (both sides)
 //Wheel diameter = 10.3 CM (32.3584)
 
@@ -90,7 +86,8 @@ void pre_auton()
 
 task autonomous()
 {
-	  // If we do end up needing two autonomous modes, check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
+	  // If we do end up needing two autonomous modes, 
+	  // check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
 
 	  //Stage 1: turn right and left motors forward
 	  while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430) {
@@ -160,7 +157,7 @@ task usercontrol()
 			middleLeft();
 		}
 		else(vexRT[Btn8L] == 1) {
-			driveMiddle = 0;
+			motor[driveMiddle] = 0;
 		}
 		
 		//Fork (arm built onto the end of the main arm)
@@ -171,7 +168,7 @@ task usercontrol()
 			forkDown();
 		}
 		else {
-			armFork = 0;
+			motor[armFork] = 0;
 		}
 		
 		//Arm motors
@@ -182,8 +179,8 @@ task usercontrol()
 			armDown();
 		}
 		else {
-			armLeft = 0;
-			armRight = 0;
+			motor[armLeft] = 0;
+			motor[armRight] = 0;
 		} 
 	} 
 } 
