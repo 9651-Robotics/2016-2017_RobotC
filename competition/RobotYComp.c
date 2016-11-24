@@ -38,9 +38,41 @@ void pre_auton()
 
 task autonomous()
 {
+
+				//Measurments in CM
+				//Stage 0
+					// Initial
+					//B: ~25
+					//F:
+					//L:
+					//R:
+				//Stage 1
+					// Forward
+					//B: ~125 +/- 10
+					//F:
+					//L:
+					//R:
+				//Stage 2
+					// Rotate 180 degrees
+					//B:
+					//F:
+					//L:
+					//R:
+				//Stage 3
+					// Arm up
+					//B: 25
+					//F:
+					//L:
+					//R:
+				//Stage 4
+					// Strafe left and right
+					//B: 25
+					//F:
+					//L:
+					//R:
         //motor[armRight1] = -127;
    	 		//motor[armLeft1] = -127;
-   	 		//motor[armRight2] = -127;jjuud
+   	 		//motor[armRight2] = -127;
     		//motor[armLeft2] = -127;
 
 
@@ -63,21 +95,14 @@ task usercontrol(){
     	motor[backLeft] =  vexRT[Ch3] + vexRT[Ch1] - vexRT[Ch4];
 
     	//Move arm down
-    	if(vexRT[Btn6U] == 1 && armDegree < DANGER) {
+    	if(vexRT[Btn6D] == 1) {
     		motor[armRight1] = 127;
     		motor[armLeft1] = 127;
     		motor[armRight2] = 127;
     		motor[armLeft2] =  127;
    	 	}
-   	 	//Move Arm Up Slow
-   	 	else if (vexRT[Btn6U] == 1 && armDegree > DANGER) {
-   	 		motor[armRight1] = -127;
-   	 		motor[armLeft1] = -127;
-   	 		motor[armRight2] = -127;
-    		motor[armLeft2] = -127;
-   		}
  			//Move Arm Up
-   	 	else if(vexRT[Btn6D] == 1) {
+   	 	else if(vexRT[Btn6U] == 1) {
    	 		motor[armRight1] = -127;
    	 		motor[armLeft1] = -127;
    	 		motor[armRight2] = -127;

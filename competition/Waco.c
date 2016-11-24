@@ -83,6 +83,7 @@ task autonomous()
 	  }
 	  wait1Msec(1000);
 	  //Stage 2: turn 180 degrees
+	  // ISSUE
 	  while(SensorValue[rightEncoder] >= -165 && SensorValue[leftEncoder] <= 1110) {
 	  	motor[driveLeft] = 65;
 	  	motor[driveRight] = -65;

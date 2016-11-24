@@ -91,6 +91,7 @@ task autonomous()
 	  }
 	  wait1Msec(1000);
 	  //Stage 2: turn 180 degrees
+	  // ISSUE
 	  while(SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110) {
 	  	motor[driveLeft] = 67;
 	  	motor[driveRight] = -67;
@@ -140,7 +141,7 @@ task usercontrol()
 
 		while(vexRT[Btn8U] == 1)
 		{
-				bLCDBacklight = true;
+			bLCDBacklight = true;
 		}
 		if(vexRT[Btn8D] == 1)
 		{
