@@ -12,6 +12,7 @@
 #pragma config(Motor,  port8,  armRight2,      tmotorNormal, openLoop)
 #pragma config(Motor,  port9,  armLeft2,       tmotorNormal, openLoop, reversed)
 
+//BACK ULTRASONIC IS NOW RIGHT ULTRASONIC
 
 #pragma platform(VEX)
 

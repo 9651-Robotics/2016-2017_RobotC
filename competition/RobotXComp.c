@@ -26,6 +26,9 @@ const short centerButton = 2;
 const short rightButton = 4;
 
 int nBatteryAverage = nAvgBatteryLevel;
+int leftShaft = SensorValue[leftEncoder];
+int rightShaft = SensorValue[rightEncoder];
+int shaftAvg = (SensorValue[rightEncoder] + SensorValue[leftEncoder])/2;
 
 //const float rotations = 360.0;
 //Rotations captured @ 127 motor power
@@ -64,6 +67,13 @@ void middleRight() {
 void middleLeft() {
 	motor[driveMiddle] = 127;
 }
+void autonDriveTime(int driveSpeed, int mSec) {
+
+}
+void autonArm(int armSpeed) {
+	motor[armRight] = armSpeed;
+	motor[armLeft] = armSpeed;
+}
 
 void pre_auton()
 {
@@ -85,25 +95,23 @@ task autonomous()
 	  // If we do end up needing two autonomous modes, check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
 
 	  //Stage 1: turn right and left motors forward
-	  while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430) {
-	  	motor[driveLeft] = 67;
-	  	motor[driveRight] = 67;
-	  }
-	  wait1Msec(1000);
+	  do {
+	    motor[driveLeft] = 67;
+	   	motor[driveRight] = 67;
+	  } while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430);
+	  wait1Msec(700);
 	  //Stage 2: turn 180 degrees
-	  // ISSUE
-	  while(SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110) {
+	  do {
 	  	motor[driveLeft] = 67;
 	  	motor[driveRight] = -67;
-	  }
+		} while (SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110);
 	  //Turn arm sometime between stages two and three
-	  wait1Msec(1000);
+	  wait1Msec(700);
 	  //Stage 3: reverse
-	  while(SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20) {
-	  	motor[driveLeft] = -67;
-	  	motor[driveRight] = -67;
-	  }
-
+	  do {
+	 	  motor[driveLeft] = -67;
+	 	  motor[driveRight] = -67;
+	 	} while (SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20);
 }
 
 task usercontrol()
