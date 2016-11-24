@@ -7,5 +7,8 @@ Please check [the wiki](https://github.com/9651-Robotics/2016-2017_RobotC/wiki) 
 ## Folder Overview
 
 * `competition` is where we keep our competition code
-* `dev` is where we keep our in-development code
+* `dev` is where we keep all code not built in the VEX competition template
+  * `broken` is code that contains errors (will not compile) however still has value
+  * `functional` is code that works for sure, used for testing sensors and drivetrains
+  * `reference` is a mix of RobotC sample code and our refrence code used for composing new files
 * `plans` contains visual mockups of our autonomous plans
