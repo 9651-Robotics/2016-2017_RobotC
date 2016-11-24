@@ -81,6 +81,11 @@ void pre_auton()
 	// Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
 	bStopTasksBetweenModes = true;
 
+	displayLCDPos(0,0);
+	displayNextLCDString("IWasNotBuilt");
+	displayLCDPos(1,0);
+	displayNextLCDString("ToFeelRemorse");
+
 	SensorValue[rightEncoder] = 0;
 	SensorValue[leftEncoder] = 0;
 	nMotorEncoder[rightEncoder]=0;
@@ -151,6 +156,7 @@ task usercontrol()
 		{
 			bLCDBacklight = true;
 		}
+
 		if(vexRT[Btn8D] == 1)
 		{
 			clearLCDLine(0);
