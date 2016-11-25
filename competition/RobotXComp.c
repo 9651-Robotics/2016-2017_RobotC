@@ -97,7 +97,8 @@ void pre_auton()
 
 task autonomous()
 {
-	  // If we do end up needing two autonomous modes, check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
+	  // If we do end up needing two autonomous modes,
+		// check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
 
 	  //Stage 1: turn right and left motors forward
 	  do {
