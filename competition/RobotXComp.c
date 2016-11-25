@@ -161,7 +161,7 @@ task usercontrol()
 		if(vexRT[Btn8D] == 1)
 		{
 			clearLCDLine(0);
-  		clearLCDLine(1);
+			clearLCDLine(1);
 			SensorValue[rightEncoder] = 0;
 			SensorValue[leftEncoder] = 0;
 		}
