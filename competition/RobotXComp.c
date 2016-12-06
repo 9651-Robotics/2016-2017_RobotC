@@ -101,6 +101,11 @@ task autonomous()
 		// check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
 
 	  //Stage 1: turn right and left motors forward
+		motor[armLeft] = 67;
+	  motor[armRight] = 67;
+	  wait1Msec(2200);
+	  motor[armLeft] = 0;
+	  motor[armRight] = 0;
 	  do {
 	    motor[driveLeft] = 67;
 	   	motor[driveRight] = 67;
@@ -120,8 +125,7 @@ task autonomous()
 	 	} while (SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20);
 }
 
-task usercontrol()
-{
+task usercontrol() {
 
 	string mainBattery, backupBattery;
 	int count = 0;
