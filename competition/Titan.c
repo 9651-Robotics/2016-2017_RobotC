@@ -1,3 +1,5 @@
+#pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
 #pragma config(Motor, port2, upperArmRight,tmotorVex393, openLoop)
 #pragma config(Motor, port3, lowerArmRight,tmotorVex393, openLoop)
 #pragma config(Motor, port4, upperArmLeft, tmotorVex393, openLoop)
@@ -13,6 +15,17 @@
 #pragma autonomousDuration(20)
 #pragma userControlDuration(120)
 
+// TO-DO LIST
+//	1. Make sure motors are ported correctly
+//	2. Add functions for partial/full control of arm
+//		2a. Set up motors "functionally" with speed caps
+//		2b. Add functions for lifting and grabbing
+//		2c. Add option to unlock speed caps
+//	3. Sensor setup
+//		3a. Ultrasonics and autonomous programming
+//		3b. Arm potentiometer/encoder? (???)
+
+
 #include "Vex_Competition_Includes.c"   
 
 const short leftButton = 1;
@@ -22,12 +35,13 @@ const short rightButton = 4;
 int nBatteryAverage = nAvgBatteryLevel;
 
 void LowerAndOpen() {
-	motor[armRight] = 127;
-	motor[armLeft] = 127;
+	//Arm Motors down
+	//Grabber Open
 }
 
 void UpAndClose() {
-	
+	//Arm Motors up
+	//Close grabber
 }
 
 void pre_auton()
@@ -35,23 +49,34 @@ void pre_auton()
 
   bStopTasksBetweenModes = true;
 
+  	displayLCDPos(0,0);
+	displayNextLCDString("IWasNotBuilt");
+	displayLCDPos(1,0);
+	displayNextLCDString("ToFeelRemorse");
+
 }
 
 task autonomous()
 {
-
-	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
+	//AutonomousCodePlaceholderForTesting();  
 }
 
 
 task usercontrol()
 {
 
+	string mainBattery, backupBattery;
+
 	while (true)
 	{
 
+	int leftForce = vexRT[Ch2];
+	int rightForce = vexRT[Ch3];
 	motor[wheelRight] = (VexRT[Ch2]);
 	motor[wheelLeft] = (VexRT[Ch3]);
+
+	// Remember to find sarick's 'Functional Programming' way of doing this 
+	// Wasen't it like "motor[wheelRight] = VexRT[Btn8D] * CapValue" or something like that?
 
 	if(VexRT[Btn7U] && VexRT[Btn8U] == 1){
 		motor[upperArmRight] = 127;
