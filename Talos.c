@@ -1,11 +1,11 @@
-#pragma config(Motor, port2, upperArmRight,tmotorVex393, openLoop)
-#pragma config(Motor, port3, lowerArmRight,tmotorVex393, openLoop)
-#pragma config(Motor, port4, upperArmLeft, tmotorVex393, openLoop, reversed)
-#pragma config(Motor, port5, lowerArmLeft, tmotorVex393, openLoop, reversed)
+#pragma config(Motor, port2, upperArmRight,tmotorVex393, openLoop, reversed)
+#pragma config(Motor, port3, lowerArmRight,tmotorVex393, openLoop, reversed)
+#pragma config(Motor, port4, upperArmLeft, tmotorVex393, openLoop)
+#pragma config(Motor, port5, lowerArmLeft, tmotorVex393, openLoop)
 #pragma config(Motor, port6, wheelRight, tmotorVex393, openLoop, reversed)
 #pragma config(Motor, port7, wheelLeft, tmotorVex393, openLoop)
-#pragma config(Motor, port8, grabberRight, tmotorVex393, openLoop)
-#pragma config(Motor, port9, grabberLeft, tmotorVex393, openLoop, reversed, reversed)
+#pragma config(Motor, port8, grabberJaw, tmotorVex393, openLoop)
+#pragma config(Motor, port9, grabberFlipper, tmotorVex393, openLoop, reversed)
 
 #pragma platform(VEX)
 
@@ -68,21 +68,23 @@ task usercontrol()
 
 	while (true)
 	{
-		motor[wheelRight]    = (vexRT[Ch2]);
-		motor[wheelLeft]     = (vexRT[Ch3]);
+		motor[wheelRight]     = (vexRT[Ch2]);
+		motor[wheelLeft]      = (vexRT[Ch3]);
 
-		motor[upperArmLeft]  = (vexRT[Btn5U]) * 127;
-		motor[lowerArmLeft]  = (vexRT[Btn5U]) * 127;
-		motor[upperArmLeft]  = (vexRT[Btn5D]) * -127;
-		motor[lowerArmLeft]  = (vexRT[Btn5D]) * -127;
-		motor[upperArmRight] = (vexRT[Btn5U]) * 127;
-		motor[lowerArmRight] = (vexRT[Btn5U]) * 127;
-		motor[upperArmRight] = (vexRT[Btn5D]) * -127;
-		motor[lowerArmRight] = (vexRT[Btn5D]) * -127;
+		motor[upperArmLeft]   = (vexRT[Btn5D]) *  127;
+		motor[lowerArmLeft]   = (vexRT[Btn5D]) *  127;
+		motor[upperArmRight]  = (vexRT[Btn5D]) *  127;
+		motor[lowerArmRight]  = (vexRT[Btn5D]) *  127;
 
-		motor[grabberLeft]   = (vexRT[Btn6U]) *  95;
-		motor[grabberRight]  = (vexRT[Btn6U]) *  95;
-		motor[grabberLeft]   = (vexRT[Btn6D]) * -95;
-		motor[grabberRight]  = (vexRT[Btn6D]) * -95;
+		motor[upperArmLeft]   = ((vexRT[Btn5U]) * 127) * (-1);
+		motor[lowerArmLeft]   = ((vexRT[Btn5U]) * 127) * (-1);
+		motor[upperArmRight]  = ((vexRT[Btn5U]) * 127) * (-1);
+		motor[lowerArmRight]  = ((vexRT[Btn5U]) * 127) * (-1);
+
+		motor[grabberJaw]     =  (vexRT[Btn6D]) *  95;
+		motor[grabberJaw]     = ~(95 * vexRT[Btn6U]);
+
+		motor[grabberFlipper] = (vexRT[Btn8D]) *   55;
+		motor[grabberFlipper] = ((vexRT[Btn8U]) *  55) * (-1);
 	}
 }

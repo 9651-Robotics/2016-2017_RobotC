@@ -101,28 +101,28 @@ task autonomous()
 		// check back on (https://www.vexforum.com/index.php/10222-how-to-program-lcd-display-robotc/0)
 
 	  //Stage 1: turn right and left motors forward
-		motor[armLeft] = 67;
-	  motor[armRight] = 67;
-	  wait1Msec(2200);
-	  motor[armLeft] = 0;
-	  motor[armRight] = 0;
-	  do {
-	    motor[driveLeft] = 67;
-	   	motor[driveRight] = 67;
-	  } while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430);
-	  wait1Msec(700);
+//		motor[armLeft] = 67;
+//	  motor[armRight] = 67;
+//	  wait1Msec(2200);
+//	  motor[armLeft] = 0;
+//	  motor[armRight] = 0;
+//	  do {
+//	    motor[driveLeft] = 67;
+//	   	motor[driveRight] = 67;
+//	  } while(SensorValue[rightEncoder] <= 430 && SensorValue[leftEncoder] <= 430);
+//	  wait1Msec(700);
 	  //Stage 2: turn 180 degrees
-	  do {
-	  	motor[driveLeft] = 67;
-	  	motor[driveRight] = -67;
-		} while (SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110);
+//	  do {
+//	  	motor[driveLeft] = 67;
+//	  	motor[driveRight] = -67;
+//		} while (SensorValue[rightEncoder] >= -167 && SensorValue[leftEncoder] <= 1110);
 	  //Turn arm sometime between stages two and three
-	  wait1Msec(700);
-	  //Stage 3: reverse
-	  do {
-	 	  motor[driveLeft] = -67;
-	 	  motor[driveRight] = -67;
-	 	} while (SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20);
+//	  wait1Msec(700);
+//	  //Stage 3: reverse
+//	  do {
+//	 	  motor[driveLeft] = -67;
+//	 	  motor[driveRight] = -67;
+//	 	} while (SensorValue[rightEncoder] >= -1280 && SensorValue[leftEncoder] >= -20);
 }
 
 task usercontrol() {
