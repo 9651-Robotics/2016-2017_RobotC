@@ -5,7 +5,7 @@ task main()
 {
   while(true)                     // Loop Forever
   {
-    if(vexRT[Btn6U] == 1)         // If button 6U (upper right shoulder button) is pressed:
+    if(vexRT[Btn7R] == 1)         // If button 6U (upper right shoulder button) is pressed:
     {
       SensorValue[solenoid] = 1;  // ...activate the solenoid.
     }

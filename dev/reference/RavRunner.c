@@ -9,10 +9,10 @@ task main()
 
 	while (true) {
 
-	  motor[frontRight] = vexRT[Ch3];
-	  motor[backLeft] = vexRT[Ch3];
-    motor[backRight] = vexRT[Ch2];
-    motor[frontLeft] = vexRT[Ch2];
+	  motor[frontRight] = vexRT[Ch2];
+	  motor[backLeft] = vexRT[Ch2];
+    motor[backRight] = vexRT[Ch3];
+    motor[frontLeft] = vexRT[Ch3];
 
 	}
 
