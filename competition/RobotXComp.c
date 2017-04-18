@@ -26,8 +26,8 @@ const short centerButton = 2;
 const short rightButton = 4;
 
 int nBatteryAverage = nAvgBatteryLevel;
-int leftShaft = SensorValue[leftEncoder];
-int rightShaft = SensorValue[rightEncoder];
+int FrontleftShaft = SensorValue[leftEncoder];
+int FrontrightShaft = SensorValue[rightEncoder];
 int shaftAvg = (SensorValue[rightEncoder] + SensorValue[leftEncoder])/2;
 
 //const float rotations = 360.0;
