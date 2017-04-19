@@ -12,13 +12,13 @@
 
 #pragma platform(VEX)
 
-const dev = true;
+const bool dev = false;
 
 //task for controlling lcd
 task display_battery()
 {
 	//set variables
-	string mainBattery, backupBattery, encoderString;
+	string mainBattery, backupBattery;
 	while (true) //do one thing forever
 	{
 		clearLCDLine(0); //clean LCD
@@ -48,29 +48,32 @@ task display_battery()
 //calibration run
 task calibration()
 {
+	displayLCDString(0, 0, "Calibration Test");
+	while (true){
+		while (nLCDButtons != 2){}//wait for button press
+		while (nLCDButtons != 0){}//wait for button release
+		clearLCDLine(0); //clean LCD
 
-	while (nLCDButtons != 2){}//wait for button press
-	while (nLCDButtons != 0){}//wait for button release
+		int init_value = SensorValue(drive_encoder); //record initial value
 
-	int init_value = SensorValue(drive_encoder); //record initial value
+		motor[driveLeftA]  = 127; //haul ass
+		motor[driveLeftB]  = 127;
+		motor[driveRightA] = 127;
+		motor[driveRightB] = 127;
 
-	motor[driveLeftA]  = 127; //haul ass
-	motor[driveLeftB]  = 127;
-	motor[driveRightA] = 127;
-	motor[driveRightB] = 127;
+		wait1Msec(5000); //5 second trial
 
-	wait1Msec(5000); //5 second trial
+		int final_value = SensorValue(drive_encoder); //record final value
 
-	int final_value = SensorValue(drive_encoder); //record final value
-
-	motor[driveLeftA]  = 127; //stop
-	motor[driveLeftB]  = 127;
-	motor[driveRightA] = 127;
-	motor[driveRightB] = 127;
+		motor[driveLeftA]  = 0; //stop
+		motor[driveLeftB]  = 0;
+		motor[driveRightA] = 0;
+		motor[driveRightB] = 0;
 
 
-	displayLCDString(0, 0, "Revolutions: "); //start the line
-	displayNextLCDNumber(abs(final_value - init_value));
+		displayLCDString(0, 0, "Revolutions: "); //start the line
+		displayNextLCDNumber(abs(final_value - init_value));
+	}
 }
 
 task drive()
@@ -97,8 +100,10 @@ task main()
 	if (dev)
 	{
 		startTask(calibration);
+	} else {
+		startTask(drive);
 	}
 
-	startTask(drive);
-	
+	while (true) {};
+
 }
