@@ -43,6 +43,30 @@ task display_battery()
 	}
 }
 
+//calibration run
+task calibration()
+{
+	int init_value = SensorValue(drive_encoder); //record initial value
+
+	motor[driveLeftA]  = 127; //haul ass
+	motor[driveLeftB]  = 127;
+	motor[driveRightA] = 127;
+	motor[driveRightB] = 127;
+
+	wait1Msec(5000); //5 second trial
+
+	int final_value = SensorValue(drive_encoder); //record final value
+
+	motor[driveLeftA]  = 127; //stop
+	motor[driveLeftB]  = 127;
+	motor[driveRightA] = 127;
+	motor[driveRightB] = 127;
+
+
+	displayLCDString(0, 0, "Revolutions: "); //start the line
+	displayNextLCDNumber(abs(final_value - init_value));
+}
+
 //main task
 task main()
 {
