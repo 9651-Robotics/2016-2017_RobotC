@@ -12,6 +12,8 @@
 
 #pragma platform(VEX)
 
+const dev = true;
+
 //task for controlling lcd
 task display_battery()
 {
@@ -46,6 +48,10 @@ task display_battery()
 //calibration run
 task calibration()
 {
+
+	while (nLCDButtons != 2){}//wait for button press
+	while (nLCDButtons != 0){}//wait for button release
+
 	int init_value = SensorValue(drive_encoder); //record initial value
 
 	motor[driveLeftA]  = 127; //haul ass
@@ -67,10 +73,8 @@ task calibration()
 	displayNextLCDNumber(abs(final_value - init_value));
 }
 
-//main task
-task main()
+task drive()
 {
-	bLCDBacklight = true;//lcd backlight
 	startTask(display_battery); //start battery task
 
 	while (true) //groundhog this shit
@@ -83,4 +87,18 @@ task main()
 		motor[steerLeft]   = (vexRT[Ch1]);//steer
 		motor[steerRight]  = (vexRT[Ch1]);//steer
 	}
+}
+
+//main task
+task main()
+{
+	bLCDBacklight = true;//lcd backlight
+
+	if (dev)
+	{
+		startTask(calibration);
+	}
+
+	startTask(drive);
+	
 }
