@@ -66,16 +66,30 @@ task main() {
 
 		{
 
-			clearLCDLine(0);
-		    clearLCDLine(1);
+		 //clearLCDLine(0);
+		 // clearLCDLine(1);
 
-			displayLCDString(0, 0, "Main: ");
-			sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V');
-			displayNextLCDString(mainBattery);
+		  displayLCDPos(0,0);
+			displayNextLCDString("L:");
+			displayNextLCDNumber(SensorValue(FrontLeftEncoder));
+			displayNextLCDString("  ");
+			displayNextLCDString("R:");
+			displayNextLCDNumber(SensorValue(FrontRightEncoder));
+			displayLCDPos(1,0);
+			displayNextLCDString("BL:");
+			displayNextLCDNumber(SensorValue(BackLeftEncoder));
+			displayNextLCDString("  ");
+			displayNextLCDString("BR:");
+			displayNextLCDNumber(SensorValue(BackRightEncoder));
 
-			displayLCDString(1, 0, "L: ");
-			sprintf(backupBattery, "%1.2f R: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2);
-			displayNextLCDString(backupBattery);
+
+			//displayLCDString(0, 0, "Main: ");
+			//sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V');
+			//displayNextLCDString(mainBattery);
+
+			//displayLCDString(1, 0, "L: ");
+			//sprintf(backupBattery, "%1.2f R: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2);
+			//displayNextLCDString(backupBattery);
 
 			wait1Msec(100);
 
