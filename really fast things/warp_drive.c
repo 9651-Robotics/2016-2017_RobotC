@@ -44,6 +44,15 @@ task display_battery()
 	}
 }
 
+//set all main motors to an int
+void fire_all_cylinders(int power)
+{
+	motor[driveLeftA]  = power; //drive 'bout yay fast
+	motor[driveLeftB]  = power;
+	motor[driveRightA] = power;
+	motor[driveRightB] = power;
+}
+
 //task for calibration run
 task calibration()
 {
@@ -65,15 +74,6 @@ task calibration()
 		displayLCDString(0, 0, "Revolutions: "); //start writing
 		displayNextLCDNumber(abs(final_value - init_value));
 	}
-}
-
-//set all main motors to an int
-void fire_all_cylinders(int power)
-{
-	motor[driveLeftA]  = power; //drive 'bout yay fast
-	motor[driveLeftB]  = power;
-	motor[driveRightA] = power;
-	motor[driveRightB] = power;
 }
 
 //task for driving
