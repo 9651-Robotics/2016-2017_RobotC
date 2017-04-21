@@ -54,13 +54,11 @@ task calibration()
 		clearLCDLine(0); //clean LCD
 
 		int init_value = SensorValue(drive_encoder); //record initial value
-
 		fire_all_cylinders(127); //haul ass
 
 		wait1Msec(5000); //5 second trial
 
 		int final_value = SensorValue(drive_encoder); //record final value
-
 		fire_all_cylinders(0); //stop
 
 
@@ -81,14 +79,12 @@ void fire_all_cylinders(int power)
 //task for driving
 task drive()
 {
-	startTask(display_battery); //start battery task
-
 	while (true) //groundhog day this shit
 	{
 		//Gotta go fast!!!!!!!
 		fire_all_cylinders(vexRT[Ch3]); //drive
 
-		motor[steer]   = (vexRT[Ch1]); //steer
+		motor[steer] = (vexRT[Ch1]); //steer
 	}
 }
 
@@ -101,7 +97,8 @@ task main()
 	if (dev) {
 		startTask(calibration);
 	} else {
-		startTask(drive);
+		startTask(display_battery); //start battery task
+		startTask(drive); //initiate driver control
 	}
 
 	while (true) {}; //just let the task run forever
