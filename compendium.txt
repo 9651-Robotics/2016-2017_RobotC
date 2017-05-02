@@ -1,0 +1,34 @@
+
+THE UCC ROBOTICS COMPENDIUM: FIRST EDITION
+
+|-----------------------|
+|	Table of Contents	|
+|_______________________| 
+
+- Introduction/History
+	- Past Club Heads
+	- Past Competition Results 
+	- Culture 
+		- Popcorn Machine 
+		- IT's Trash Bin
+		- Keyboard workshop
+		- D R O P B O X (???)
+
+- Robot Construction
+	- General Advice 
+	- Aluminum VS Steel
+	- Gear Ratios
+	- Wheels
+	- Chain VS Gearing
+	- Tensioners
+	- Weight distribution
+	- Arm construction 
+	- Lift Construction
+	- Drivetrain Construction
+
+- Robot Programming
+	- General Advice
+	- Sensors
+		- Optical Shaft Encoder 
+		- Integrated Motor Encoder
+		- Potentiometer 

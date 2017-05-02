@@ -68,18 +68,26 @@ task main() {
 			clearLCDLine(0);
 		    clearLCDLine(1);
 
-			displayLCDPos(0,0);
-			displayNextLCDString("L:");
-			displayNextLCDNumber(SensorValue(FrontLeftEncoder));
-			displayNextLCDString("  ");
-			displayNextLCDString("R:");
-			displayNextLCDNumber(SensorValue(FrontRightEncoder));
-			displayLCDPos(1,0);
-			displayNextLCDString("BL:");
-			displayNextLCDNumber(SensorValue(BackLeftEncoder));
-			displayNextLCDString("  ");
-			displayNextLCDString("BR:");
-			displayNextLCDNumber(SensorValue(BackRightEncoder));
+		    displayLCDString(0, 0, "Primary: "); //start writing
+			sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V'); //assemble the string
+			displayNextLCDString(mainBattery); //display string
+
+			displayLCDString(1, 0, "L: "); //start new line
+			sprintf(backupBattery, "%1.2f R: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2); //launch the nukes
+			displayNextLCDString(backupBattery); //display string
+
+			// displayLCDPos(0,0);
+			// displayNextLCDString("L:");
+			// displayNextLCDNumber(SensorValue(FrontLeftEncoder));
+			// displayNextLCDString("  ");
+			// displayNextLCDString("R:");
+			// displayNextLCDNumber(SensorValue(FrontRightEncoder));
+			// displayLCDPos(1,0);
+			// displayNextLCDString("BL:");
+			// displayNextLCDNumber(SensorValue(BackLeftEncoder));
+			// displayNextLCDString("  ");
+			// displayNextLCDString("BR:");
+			// displayNextLCDNumber(SensorValue(BackRightEncoder));
 
 		}
 
@@ -90,18 +98,26 @@ task main() {
 		 //clearLCDLine(0);
 		 // clearLCDLine(1);
 
-		  displayLCDPos(0,0);
-			displayNextLCDString("L:");
-			displayNextLCDNumber(SensorValue(FrontLeftEncoder));
-			displayNextLCDString("  ");
-			displayNextLCDString("R:");
-			displayNextLCDNumber(SensorValue(FrontRightEncoder));
-			displayLCDPos(1,0);
-			displayNextLCDString("BL:");
-			displayNextLCDNumber(SensorValue(BackLeftEncoder));
-			displayNextLCDString("  ");
-			displayNextLCDString("BR:");
-			displayNextLCDNumber(SensorValue(BackRightEncoder));
+		displayLCDString(0, 0, "Primary: "); //start writing
+		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V'); //assemble the string
+		displayNextLCDString(mainBattery); //display string
+
+		displayLCDString(1, 0, "L: "); //start new line
+		sprintf(backupBattery, "%1.2f R: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2); //launch the nukes
+		displayNextLCDString(backupBattery); //display string
+
+		 //  displayLCDPos(0,0);
+			// displayNextLCDString("L:");
+			// displayNextLCDNumber(SensorValue(FrontLeftEncoder));
+			// displayNextLCDString("  ");
+			// displayNextLCDString("R:");
+			// displayNextLCDNumber(SensorValue(FrontRightEncoder));
+			// displayLCDPos(1,0);
+			// displayNextLCDString("BL:");
+			// displayNextLCDNumber(SensorValue(BackLeftEncoder));
+			// displayNextLCDString("  ");
+			// displayNextLCDString("BR:");
+			// displayNextLCDNumber(SensorValue(BackRightEncoder));
 
 
 			//displayLCDString(0, 0, "Main: ");
