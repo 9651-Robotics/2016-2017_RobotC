@@ -59,7 +59,8 @@ THE UCC ROBOTICS COMPENDIUM: FIRST EDITION
 (2.3.2.3)		- Variables
 (2.3.3)		- Tasks
 (2.3.4)		- Functions
-(2.3.5)		- Debugging in RobotC
+(2.3.5)		- Examples
+(2.3.6)		- Debugging in RobotC
 (2.4)	- Sensors
 (2.4.1)		- Optical Shaft Encoder 
 (2.4.2)		- Integrated Motor Encoder
