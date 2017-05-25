@@ -11,6 +11,9 @@ void middleRight(){
 void middleLeft(){
 	motor[driveMiddle] = -50;
 }
+
+const int steering_factor = 2;
+
 task main()
 {
 	while(true) {
@@ -24,11 +27,19 @@ task main()
 		else{
 			motor[driveMiddle] = 0;
 		}
+
+		if(vexRT[Btn5D] || vexRT[Btn6D == 1]) {
+			motor[driveRightFront] = (vexRT[Ch2]) / ((vexRT[Btn6D] * steering_factor) + 1);
+			motor[driveLeftFront] = (vexRT[Ch3]) / ((vexRT[Btn5D] * steering_factor) + 1);
+			motor[driveRightBack] = ((vexRT[Ch2]) / ((vexRT[Btn6D] * steering_factor) + 1);
+			motor[driveLeftBack] = (vexRT[Ch3]) / ((vexRT[Btn5D] * steering_factor) + 1);
+		}
+		else {
 			motor[driveRightFront] = (vexRT[Ch2]);
 			motor[driveLeftFront] = (vexRT[Ch3]);
 			motor[driveRightBack] = (vexRT[Ch2]);
 			motor[driveLeftBack] = (vexRT[Ch3]);
-
+		}
 	}
 
 }

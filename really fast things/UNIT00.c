@@ -1,6 +1,5 @@
 #pragma config(I2C_Usage, I2C1, i2cSensors)
 #pragma config(UART_Usage, UART2, uartVEXLCD, baudRate19200, IOPins, None, None)
-//Sonars plugged into ports 4,6,8 and 10
 #pragma config(Sensor, dgtl4,  sonarRight,     sensorSONAR_cm)
 #pragma config(Sensor, dgtl6,  sonarLeft,      sensorSONAR_cm)
 #pragma config(Sensor, dgtl8,  sonarFront,     sensorSONAR_cm)
@@ -23,7 +22,7 @@
 	//    W |   |         |   |  W       |
 	//      |   |         |   |          |
 	//      |   |         |   |          |
-	//      |   |         |   |          | 
+	//      |   |         |   |          |
 	//   	|   |    W    |   |          |
 	//   S6 |   |==========|   |  S4     |
 	//     |   |     M6    |   |         |
@@ -54,7 +53,7 @@ void correctLeft(){
 //Compansate for oversteering to the right
 void correctRight(){
 	motor[driveLeftFront] = (vexRT[Ch3]) + 60;
-	motor[driveLefttBack] = (vexRT[Ch3]) + 60;
+	motor[driveLeftBack] = (vexRT[Ch3]) + 60;
 	correctAlarm();
 
 }
@@ -80,11 +79,11 @@ task main()
 			}
 
 		}
-			
+
 		// else{
 		// 	continue
 		// }
-		
+
 		if (vexRT[Btn6D] == 1)
 		{
 				motor[driveRightFront] = (vexRT[Ch2]) - 60;
