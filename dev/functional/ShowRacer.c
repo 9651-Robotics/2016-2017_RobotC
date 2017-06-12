@@ -28,6 +28,8 @@ task main()
 			motor[driveMiddle] = 0;
 		}
 
+
+
 		if(vexRT[Btn5D] || vexRT[Btn6D == 1]) {
 			motor[driveRightFront] = (vexRT[Ch2]) / ((vexRT[Btn6D] * steering_factor) + 1);
 			motor[driveLeftFront] = (vexRT[Ch3]) / ((vexRT[Btn5D] * steering_factor) + 1);

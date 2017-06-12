@@ -4,7 +4,6 @@
 #pragma config(Sensor, dgtl3,  FrontLeftEncoder, sensorQuadEncoder)
 #pragma config(Sensor, dgtl5,  BackRightEncoder, sensorQuadEncoder)
 #pragma config(Sensor, dgtl7,  BackLeftEncoder, sensorQuadEncoder)
-// Wire Motors by reversing Encoder <-> Motor connection Wires.
 #pragma config(Motor,  port2,           driveRightFrontRight, tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port3,           driveRightFrontLeft, tmotorVex269_MC29, openLoop)
 #pragma config(Motor,  port4,           driveLeftFrontRight, tmotorVex393_MC29, openLoop)
@@ -68,7 +67,7 @@ task main() {
 			clearLCDLine(0);
 		    clearLCDLine(1);
 
-		    displayLCDString(0, 0, "Primary: "); //start writing
+		  displayLCDString(0, 0, "Primary: "); //start writing
 			sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V'); //assemble the string
 			displayNextLCDString(mainBattery); //display string
 
@@ -102,8 +101,8 @@ task main() {
 		sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0, 'V'); //assemble the string
 		displayNextLCDString(mainBattery); //display string
 
-		displayLCDString(1, 0, "L: "); //start new line
-		sprintf(backupBattery, "%1.2f R: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2); //launch the nukes
+		displayLCDString(1, 0, "1: "); //start new line
+		sprintf(backupBattery, "%1.2f 2: %1.2f", SensorValue(expander_1)/283.2, SensorValue(expander_2)/283.2); //launch the nukes
 		displayNextLCDString(backupBattery); //display string
 
 		 //  displayLCDPos(0,0);
@@ -132,17 +131,17 @@ task main() {
 
 		}
 
-		motor[driveRightFrontRight] = (vexRT[Ch3]);
-		motor[driveRightFrontLeft]  = (vexRT[Ch3]);
+		motor[driveRightFrontRight] = (vexRT[Ch2]);
+		motor[driveRightFrontLeft]  = (vexRT[Ch2]);
 
-		motor[driveLeftFrontRight]  = (vexRT[Ch2]);
-		motor[driveLeftFrontLeft]   = (vexRT[Ch2]);
+		motor[driveLeftFrontRight]  = (vexRT[Ch3]);
+		motor[driveLeftFrontLeft]   = (vexRT[Ch3]);
 
-		motor[driveRightBackRight]  = (vexRT[Ch3]);
-		motor[driveRightBackLeft]   = (vexRT[Ch3]);
+		motor[driveRightBackRight]  = (vexRT[Ch2]);
+		motor[driveRightBackLeft]   = (vexRT[Ch2]);
 
-		motor[driveLeftBackRight]   = (vexRT[Ch2]);
-		motor[driveLeftBackLeft]    = (vexRT[Ch2]);
+		motor[driveLeftBackRight]   = (vexRT[Ch3]);
+		motor[driveLeftBackLeft]    = (vexRT[Ch3]);
 
 	}
 }
